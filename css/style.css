@@ -1,0 +1,140 @@
+body{
+    margin-top:50px;
+    margin-bottom: 50px;
+}
+
+input{
+    border:none;
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+    color:white;
+}
+
+input::placeholder{
+    color: white;
+}
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo{
+    width:300px;
+}
+
+.search-bar-container{
+    width: 100%;
+    height: 50px;
+    background-color: #E7E7E7;
+    margin-top:30px;
+}
+
+.search-bar-row{
+    height: 100%;
+    align-items: center;
+}
+
+#search-bar-recipes{
+    border:none;
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+    color:black;
+}
+
+#search-bar-recipes::placeholder{
+    color:black;
+}
+.button-submit{
+    width: 100%;
+    border:none;
+    background-color: transparent;
+    text-align: end;   
+}
+
+.filter-container{
+    margin-top:50px;
+}
+
+.input-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:50px;
+    
+}
+.filter-ingredient-container{
+    background-color: #3282F7;
+    border-radius: 5px;
+    margin-right: 20px;
+   
+}
+
+.filter-device-container{
+    
+    background-color: #68D9A4;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.filter-utensil-container{
+    
+    background-color: #ED6454;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.fa-chevron-down,.fa-chevron-up{
+    color:white;
+}
+
+.section-recipes{
+    margin-top:50px;
+    padding:0;
+}
+.recipe-card{
+    height: 400px;
+    margin-top:15px;
+}
+
+.recipe-card_img{
+    height: 50%;
+    background-color: #C7BEBE;
+    border-radius: 5px 5px 0 0;
+}
+
+.recipe-card_top-text{
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    background-color: #E7E7E7;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.recipe-card_bottom-text{
+    display: flex;
+    height: 40%;
+    background-color: #E7E7E7;
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    font-size: 12px;  
+}
+
+.recipe-card_name{
+    white-space: nowrap;
+}
+.recipe-card_time{
+    margin-left: 5px;
+}
+
+.recipe-card_ingredients p{
+    margin:0;
+}
+
+.recipe-card_description{
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
