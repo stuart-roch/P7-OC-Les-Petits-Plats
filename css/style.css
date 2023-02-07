@@ -95,7 +95,7 @@ header{
     padding:0;
 }
 .recipe-card{
-    height: 400px;
+    height: 500px;
     margin-top:15px;
 }
 
@@ -108,24 +108,22 @@ header{
 .recipe-card_top-text{
     display: flex;
     justify-content: space-between;
-    height: 10%;
+    height: 12%;
     background-color: #E7E7E7;
     padding: 10px;
     font-size: 18px;
+    line-height: 1.3em;
 }
 
 .recipe-card_bottom-text{
     display: flex;
-    height: 40%;
+    height: 38%;
     background-color: #E7E7E7;
     padding: 10px;
     border-radius: 0 0 5px 5px;
-    font-size: 12px;  
+    font-size: 12px;
 }
 
-.recipe-card_name{
-    white-space: nowrap;
-}
 .recipe-card_time{
     margin-left: 5px;
 }
@@ -135,6 +133,10 @@ header{
 }
 
 .recipe-card_description{
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
     overflow: hidden;
+    margin:0;
+    height: 65%;
 }
