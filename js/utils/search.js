@@ -10,8 +10,13 @@ function searchRecipes(recipes,input){
 function containsIngredients(ingredients,input){
     let contains=false;
     ingredients.forEach(ingredient => {
-        contains=ingredient.ingredient.toLowerCase().includes(input);
-        //console.log(ingredient.ingredient,contains,input);
+        if(contains){
+            contains=true;
+        }else{
+            contains=ingredient.ingredient.toLowerCase().includes(input);
+            //console.log(ingredient.ingredient,contains,input);
+        }
+        
     });
     return contains;
 }
