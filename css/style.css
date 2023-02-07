@@ -3,6 +3,14 @@ body{
     margin-bottom: 50px;
 }
 
+.hidden{
+    display:none;
+}
+
+ul{
+    padding:0;
+}
+
 input{
     border:none;
     background-color: transparent;
@@ -55,7 +63,10 @@ header{
 }
 
 .filter-container{
+    position: relative;
+    z-index: 1;
     margin-top:50px;
+    height: 50px;
 }
 
 .input-container{
@@ -65,6 +76,7 @@ header{
     height:50px;
     
 }
+
 .filter-ingredient-container{
     background-color: #3282F7;
     border-radius: 5px;
@@ -72,7 +84,11 @@ header{
    
 }
 
-.filter-device-container{
+.filter-ingredient-container[data-expanded="true"] ~ .filter-appliance-container{
+    height: 50px;
+
+}
+.filter-appliance-container{
     
     background-color: #68D9A4;
     border-radius: 5px;
@@ -88,6 +104,19 @@ header{
 
 .fa-chevron-down,.fa-chevron-up{
     color:white;
+}
+
+.filter-options-container ul{
+    display: flex;
+    flex-wrap: wrap;
+    height: max-content;
+}
+
+.filter-options-container li{
+    flex:0 0 33%;
+    color:white;
+    font-size: 18px;
+    list-style: none;
 }
 
 .section-recipes{
