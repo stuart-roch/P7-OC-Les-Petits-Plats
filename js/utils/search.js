@@ -27,9 +27,11 @@ searchBar.addEventListener("input",function(e){
         if(searchedRecipes !== undefined){
             recipesSection.innerHTML="";
             displayRecipes(searchedRecipes);
+            displayFilterOptions(searchedRecipes);
         }
     }else{
         recipesSection.innerHTML="";
         displayRecipes(recipes);
+        displayFilterOptions(recipes);
     }
 })
