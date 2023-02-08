@@ -35,6 +35,10 @@ function displayFilterOptions(recipes){
     const optionsAppliancesContainer=document.querySelector(".filter-appliance-container .filter-options-container ul");
     const optionsUtensilsContainer=document.querySelector(".filter-utensil-container .filter-options-container ul");
 
+    optionsAppliancesContainer.innerHTML="";
+    optionsIngredientsContainer.innerHTML="";
+    optionsUtensilsContainer.innerHTML="";
+    
     allIngredients.forEach(ingredient => {
         const option=document.createElement("li");
         option.textContent=ingredient;
