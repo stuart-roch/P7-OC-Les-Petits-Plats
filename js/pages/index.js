@@ -60,18 +60,16 @@ function expandOptions(){
     inputFilterContainer.forEach(input => input.addEventListener("click",function(e){
         const optionContainer=input.nextElementSibling;
         optionContainer.classList.toggle("hidden");
-        if(optionContainer.dataset.expanded === "true"){
-            input.firstElementChild.placeholder="Ingrédients";
+        if(input.parentElement.dataset.expanded === "true"){
             input.lastElementChild.classList.replace("fa-chevron-up","fa-chevron-down");
-            input.parentElement.classList.replace("col-7","col-3");
-            input.parentElement.classList.add("col-lg-2");
-            optionContainer.dataset.expanded="false";
+            input.parentElement.classList.replace("col-12","col-3");
+            input.parentElement.classList.replace("col-lg-7","col-lg-2");
+            input.parentElement.dataset.expanded="false";
         }else{
-            input.firstElementChild.placeholder="Rechercher un "+input.firstElementChild.placeholder.toLowerCase();
             input.lastElementChild.classList.replace("fa-chevron-down","fa-chevron-up");
-            input.parentElement.classList.replace("col-3","col-7");
-            input.parentElement.classList.remove("col-lg-2");
-            optionContainer.dataset.expanded="true";
+            input.parentElement.classList.replace("col-3","col-12");
+            input.parentElement.classList.replace("col-lg-2","col-lg-7");
+            input.parentElement.dataset.expanded="true";
         }
     }))
 }

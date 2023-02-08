@@ -84,10 +84,6 @@ header{
    
 }
 
-.filter-ingredient-container[data-expanded="true"] ~ .filter-appliance-container{
-    height: 50px;
-
-}
 .filter-appliance-container{
     
     background-color: #68D9A4;
@@ -100,6 +96,12 @@ header{
     background-color: #ED6454;
     border-radius: 5px;
     margin-right: 20px;
+}
+
+.filter-ingredient-container[data-expanded="false"],
+.filter-appliance-container[data-expanded="false"],
+.filter-utensil-container[data-expanded="false"]{
+    height: 50px;
 }
 
 .fa-chevron-down,.fa-chevron-up{
