@@ -38,7 +38,7 @@ function displayFilterOptions(recipes){
     optionsAppliancesContainer.innerHTML="";
     optionsIngredientsContainer.innerHTML="";
     optionsUtensilsContainer.innerHTML="";
-    
+
     allIngredients.forEach(ingredient => {
         const option=document.createElement("li");
         option.textContent=ingredient;
@@ -74,6 +74,7 @@ function expandOptions(){
             input.parentElement.classList.replace("col-3","col-12");
             input.parentElement.classList.replace("col-lg-2","col-lg-7");
             input.parentElement.dataset.expanded="true";
+            input.firstElementChild.focus();
         }
     }))
 }
