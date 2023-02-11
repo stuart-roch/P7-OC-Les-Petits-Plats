@@ -11,6 +11,9 @@ ul{
     padding:0;
 }
 
+li{
+    list-style: none;
+}
 input{
     border:none;
     background-color: transparent;
@@ -65,7 +68,7 @@ header{
 .filter-container{
     position: relative;
     z-index: 1;
-    margin-top:50px;
+    margin-top:25px;
     height: 50px;
 }
 
@@ -77,21 +80,21 @@ header{
     
 }
 
-.filter-ingredient-container{
+.filter-ingredient-container,.option-ingredient-selected{
     background-color: #3282F7;
     border-radius: 5px;
     margin-right: 20px;
    
 }
 
-.filter-appliance-container{
+.filter-appliance-container,.option-appliance-selected{
     
     background-color: #68D9A4;
     border-radius: 5px;
     margin-right: 20px;
 }
 
-.filter-utensil-container{
+.filter-utensil-container,.option-utensil-selected{
     
     background-color: #ED6454;
     border-radius: 5px;
@@ -118,9 +121,23 @@ header{
     flex:0 0 33%;
     color:white;
     font-size: 18px;
-    list-style: none;
 }
 
+.filter-selected-container{
+    margin-top:25px;
+}
+.filter-selected-container ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+.option-selected{
+    flex:0 0 11%;
+    padding:5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
 .section-recipes{
     margin-top:50px;
     padding:0;
