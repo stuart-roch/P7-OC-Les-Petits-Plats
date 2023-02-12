@@ -96,24 +96,21 @@ function addFilterTag(){
             optionSelected.textContent=option.textContent;
             const closeIcon=document.createElement("i");
             closeIcon.setAttribute("class","fa-regular fa-circle-xmark");
+            removeFilterTag(closeIcon);
             filterTagContainer.append(optionSelected);
             optionSelected.append(closeIcon);
-            removeFilterTag();         
         })
     })
 }
 
-function removeFilterTag(){
+function removeFilterTag(closeIcon){
     const filterTagContainer=document.querySelector(".filter-selected-container ul");
 
-    const closeIcon=document.querySelectorAll(".fa-circle-xmark");
-
-    closeIcon.forEach(close => {
-        close.addEventListener("click",function(e){
-            console.log(close.parentElement);
-            filterTagContainer.removeChild(close.parentElement);
-        })
+    closeIcon.addEventListener("click",function(e){
+        //console.log(closeIcon.parentNode);
+        filterTagContainer.removeChild(closeIcon.parentNode);
     })
+    
 }
 function init(){
     displayRecipes(recipes);
