@@ -22,7 +22,7 @@ function getArrayAllAppliances(recipes){
 
 function getArrayAllUtensils(recipes){
     let arrayUtensils=[];
-    recipes.forEach(recipe => arrayUtensils.push(...recipe.ustensils));
+    recipes.forEach(recipe => arrayUtensils.push(...recipe.ustensils.map(utensil => utensil.toLowerCase())));
     arrayUtensils=[...new Set(arrayUtensils)];
     return arrayUtensils;
 }
