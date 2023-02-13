@@ -41,18 +41,21 @@ function displayFilterOptions(recipes){
 
     allIngredients.forEach(ingredient => {
         const option=document.createElement("li");
+        option.setAttribute("class","option-ingredient");
         option.textContent=ingredient;
         optionsIngredientsContainer.appendChild(option);
     })
 
     allAppliances.forEach(appliance => {
         const option=document.createElement("li");
+        option.setAttribute("class","option-appliance");
         option.textContent=appliance;
         optionsAppliancesContainer.appendChild(option);
     })
     
     allUtensils.forEach(utensil => {
         const option=document.createElement("li");
+        option.setAttribute("class","option-utensil");
         option.textContent=utensil;
         optionsUtensilsContainer.appendChild(option);
     })
@@ -79,10 +82,41 @@ function expandOptions(){
     }))
 }
 
+function addFilterTag(){
+    const filterTagContainer=document.querySelector(".filter-selected-container ul");
+
+    const options = [...document.querySelectorAll(".option-ingredient"),
+    ...document.querySelectorAll(".option-appliance"),
+    ...document.querySelectorAll(".option-utensil")];
+    
+    options.forEach(option => {
+        option.addEventListener("click",function(e){
+            const optionSelected=document.createElement("li");
+            optionSelected.className=option.className+"-selected"+" option-selected";
+            optionSelected.textContent=option.textContent;
+            const closeIcon=document.createElement("i");
+            closeIcon.setAttribute("class","fa-regular fa-circle-xmark");
+            removeFilterTag(closeIcon);
+            filterTagContainer.append(optionSelected);
+            optionSelected.append(closeIcon);
+        })
+    })
+}
+
+function removeFilterTag(closeIcon){
+    const filterTagContainer=document.querySelector(".filter-selected-container ul");
+
+    closeIcon.addEventListener("click",function(e){
+        //console.log(closeIcon.parentNode);
+        filterTagContainer.removeChild(closeIcon.parentNode);
+    })
+    
+}
 function init(){
     displayRecipes(recipes);
     displayFilterOptions(recipes);
     expandOptions();
+    addFilterTag();
 }
 
 init();
