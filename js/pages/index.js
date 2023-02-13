@@ -8,14 +8,14 @@ function displayRecipes(recipes){
 
 function getArrayAllIngredients(recipes){
     let arrayIngredients=[];
-    recipes.forEach(recipe => arrayIngredients.push(...recipe.ingredients.map(ingredient => ingredient.ingredient)));
+    recipes.forEach(recipe => arrayIngredients.push(...recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase())));
     arrayIngredients=[...new Set(arrayIngredients)];
     return arrayIngredients;
 }
 
 function getArrayAllAppliances(recipes){
     let arrayAppliances=[];
-    recipes.forEach(recipe => arrayAppliances.push(recipe.appliance));
+    recipes.forEach(recipe => arrayAppliances.push(recipe.appliance.toLowerCase()));
     arrayAppliances=[...new Set(arrayAppliances)];
     return arrayAppliances;
 }
