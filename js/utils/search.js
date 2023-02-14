@@ -1,9 +1,12 @@
+let currentRecipes=recipes;
+
+//let stateRecipes=[];
+
 const searchBar=document.querySelector("#search-bar-recipes");
-const recipesSection=document.querySelector(".section-recipes .row");
 
 function searchRecipes(recipes,input){
     input=input.toLowerCase();
-    recipesSearched=recipes.filter(recipe => recipe.name.toLowerCase().includes(input) || containsIngredients(recipe.ingredients,input) || recipe.description.toLowerCase().includes(input));
+    const recipesSearched=recipes.filter(recipe => recipe.name.toLowerCase().includes(input) || containsIngredients(recipe.ingredients,input) || recipe.description.toLowerCase().includes(input));
     return recipesSearched;
 }
 
@@ -21,17 +24,45 @@ function containsIngredients(ingredients,input){
     return contains;
 }
 
+function searchByTag(recipes,tag){
+    let recipesSearched;
+    if(tag.className.includes("ingredient")){
+        recipesSearched=recipes.filter(recipe => containsIngredients(recipe.ingredients,tag.textContent));
+    }
+    if(tag.className.includes("appliance")){
+        recipesSearched=recipes.filter(recipe => recipe.appliance.toLowerCase().includes(tag.textContent));
+    }
+    if(tag.className.includes("utensil")){
+        recipesSearched=recipes.filter(recipe => recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(tag.textContent));
+    }
+    return recipesSearched;
+}
+
+function searchByTags(recipes,tags){
+    let recipesSearched=recipes;
+    tags.forEach(tag => recipesSearched=searchByTag(recipesSearched,tag));
+    return recipesSearched;
+}
+
 searchBar.addEventListener("input",function(e){
+    const optionSelected=document.querySelectorAll(".option-selected");
     if(searchBar.value.length >=3){
-        const searchedRecipes=searchRecipes(recipes,searchBar.value);
-        if(searchedRecipes !== undefined){
-            recipesSection.innerHTML="";
-            displayRecipes(searchedRecipes);
-            displayFilterOptions(searchedRecipes);
+        currentRecipes=searchRecipes(currentRecipes,searchBar.value);
+        if(currentRecipes !== undefined){
+            displayRecipes(currentRecipes);
+            displayFilterOptions(currentRecipes);
+            addFilterTag();
+            //console.log(currentRecipes);
         }
     }else{
-        recipesSection.innerHTML="";
-        displayRecipes(recipes);
-        displayFilterOptions(recipes);
+        if(optionSelected.length !== 0){
+            currentRecipes=searchByTags(recipes,optionSelected);
+        }else{
+            currentRecipes=recipes;
+        }
+        //currentRecipes=recipes;
+        displayRecipes(currentRecipes);
+        displayFilterOptions(currentRecipes);
+        addFilterTag();
     }
 })

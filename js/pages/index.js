@@ -1,5 +1,6 @@
 function displayRecipes(recipes){
     const recipesSection=document.querySelector(".section-recipes .row");
+    recipesSection.innerHTML="";
     recipes.forEach(recipe => {
         const recipeModel=new RecipeFactory(recipe);
         recipesSection.appendChild(recipeModel.getRecipeCardDOM());
@@ -40,24 +41,30 @@ function displayFilterOptions(recipes){
     optionsUtensilsContainer.innerHTML="";
 
     allIngredients.forEach(ingredient => {
-        const option=document.createElement("li");
+        const optionContainer=document.createElement("li");
+        const option=document.createElement("p");
         option.setAttribute("class","option-ingredient");
         option.textContent=ingredient;
-        optionsIngredientsContainer.appendChild(option);
+        optionsIngredientsContainer.appendChild(optionContainer);
+        optionContainer.appendChild(option);
     })
 
     allAppliances.forEach(appliance => {
-        const option=document.createElement("li");
+        const optionContainer=document.createElement("li");
+        const option=document.createElement("p");
         option.setAttribute("class","option-appliance");
         option.textContent=appliance;
-        optionsAppliancesContainer.appendChild(option);
+        optionsAppliancesContainer.appendChild(optionContainer);
+        optionContainer.appendChild(option);
     })
     
     allUtensils.forEach(utensil => {
-        const option=document.createElement("li");
+        const optionContainer=document.createElement("li");
+        const option=document.createElement("p");
         option.setAttribute("class","option-utensil");
         option.textContent=utensil;
-        optionsUtensilsContainer.appendChild(option);
+        optionsUtensilsContainer.appendChild(optionContainer);
+        optionContainer.appendChild(option);
     })
 
 }
@@ -91,27 +98,41 @@ function addFilterTag(){
     
     options.forEach(option => {
         option.addEventListener("click",function(e){
-            const optionSelected=document.createElement("li");
-            optionSelected.className=option.className+"-selected"+" option-selected";
+            const optionSelectedContainer=document.createElement("li");
+            const optionSelected=document.createElement("strong");
+            optionSelectedContainer.className=option.className+"-selected"+" option-selected";
             optionSelected.textContent=option.textContent;
             const closeIcon=document.createElement("i");
             closeIcon.setAttribute("class","fa-regular fa-circle-xmark");
             removeFilterTag(closeIcon);
-            filterTagContainer.append(optionSelected);
-            optionSelected.append(closeIcon);
+            filterTagContainer.append(optionSelectedContainer);
+            optionSelectedContainer.append(optionSelected)
+            optionSelectedContainer.append(closeIcon);
+            //stateRecipes.push({tag:option,previousRecipes:currentRecipes});
+            currentRecipes=searchByTag(currentRecipes,option);
+            displayRecipes(currentRecipes);
+            displayFilterOptions(currentRecipes);
+            addFilterTag();
         })
     })
 }
 
 function removeFilterTag(closeIcon){
     const filterTagContainer=document.querySelector(".filter-selected-container ul");
-
+    const optionSelected=document.querySelectorAll(".option-selected");
+    const searchBar=document.querySelector("#search-bar-recipes");
     closeIcon.addEventListener("click",function(e){
-        //console.log(closeIcon.parentNode);
         filterTagContainer.removeChild(closeIcon.parentNode);
+        //currentRecipes=stateRecipes.filter(state => state.tag.textContent === tag.textContent)[0].previousRecipes;
+        currentRecipes=searchRecipes(recipes,searchBar.value);
+        currentRecipes=searchByTags(recipes,optionSelected);
+        console.log(currentRecipes);
+        displayRecipes(currentRecipes);
+        displayFilterOptions(currentRecipes);
+        addFilterTag();
     })
-    
 }
+
 function init(){
     displayRecipes(recipes);
     displayFilterOptions(recipes);
