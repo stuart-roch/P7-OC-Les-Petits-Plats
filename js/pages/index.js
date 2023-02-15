@@ -69,7 +69,6 @@ function displayFilterOptions(recipes){
         optionsUtensilsContainer.appendChild(optionContainer);
         optionContainer.appendChild(option);
     })
-
 }
 
 function expandOptions(){
@@ -100,6 +99,20 @@ function expandOptions(){
         })
     }))
 }
+/*
+function shrinkOptions(){
+    const inputFilterContainer=document.querySelectorAll(".input-container");
+    inputFilterContainer.forEach(input => {
+        if(input.parentElement.dataset.expanded === "true"){
+            const optionContainer=input.nextElementSibling;
+            optionContainer.classList.toggle("hidden");
+            input.lastElementChild.classList.replace("fa-chevron-up","fa-chevron-down");
+            input.parentElement.classList.replace("col-12","col-3");
+            input.parentElement.classList.replace("col-lg-7","col-lg-2");
+            input.parentElement.dataset.expanded="false";
+        }
+    })
+}*/
 
 function addFilterTag(){
     const filterTagContainer=document.querySelector(".filter-selected-container ul");
@@ -120,6 +133,7 @@ function addFilterTag(){
             filterTagContainer.append(optionSelectedContainer);
             optionSelectedContainer.append(optionSelected)
             optionSelectedContainer.append(closeIcon);
+            //shrinkOptions();
             //stateRecipes.push({tag:option,previousRecipes:currentRecipes});
             currentRecipes=searchByTag(currentRecipes,option);
             displayRecipes(currentRecipes);
@@ -159,15 +173,32 @@ function hideOptions(){
     options.forEach(option => {
         optionsSelected.forEach(optionSelected => {
             if(option.textContent === optionSelected.textContent){
-                option.parentElement.classList.toggle("hidden");
+                option.parentElement.style.display="none";
             }
         })
     })
 }
 
+function autoComplete(){
+    const inputFilterContainers=document.querySelectorAll(".input-container");
+    inputFilterContainers.forEach(inputFilterContainer => inputFilterContainer.firstElementChild.addEventListener("input",function(e){
+        const optionContainer=inputFilterContainer.nextElementSibling.firstElementChild;
+        Array.from(optionContainer.children).forEach(child => {
+            //console.log(!child.firstElementChild.textContent.includes(e.target.value.toLowerCase()),e.target.value);
+            if(!(child.firstElementChild.textContent.includes(e.target.value.toLowerCase()))){
+                child.className="hidden";
+            }else{
+                child.removeAttribute("class");
+                //hideOptions();
+            }
+        })
+    }))
+}
+
 function init(){
     displayRecipes(recipes);
     displayFilterOptions(recipes);
+    autoComplete();
     expandOptions();
     addFilterTag();
 }

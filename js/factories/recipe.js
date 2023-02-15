@@ -82,8 +82,10 @@ class RecipeFactory{
             const textIngredient=document.createElement("p");
             if(ingredient["unit"] !== undefined){
                 textIngredient.innerHTML="<strong>"+ingredient["ingredient"]+": </strong>"+ingredient["quantity"]+" "+ingredient["unit"];
-            }else{
+            }else if(ingredient["quantity"] !== undefined){
                 textIngredient.innerHTML="<strong>"+ingredient["ingredient"]+": </strong>"+ingredient["quantity"];
+            }else{
+                textIngredient.innerHTML="<strong>"+ingredient["ingredient"];
             }
             textIngredients.append(textIngredient);
         })
