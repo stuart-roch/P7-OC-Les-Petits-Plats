@@ -70,6 +70,7 @@ function displayFilterOptions(recipes){
 }
 
 function expandOptions(){
+    const filterContainer=document.querySelector(".filter-container .row");
     const inputFilterContainer=document.querySelectorAll(".input-container");
     inputFilterContainer.forEach(input => input.addEventListener("click",function(e){
         const optionContainer=input.nextElementSibling;
@@ -84,8 +85,16 @@ function expandOptions(){
             input.parentElement.classList.replace("col-3","col-12");
             input.parentElement.classList.replace("col-lg-2","col-lg-7");
             input.parentElement.dataset.expanded="true";
-            input.firstElementChild.focus();
         }
+        Array.from(filterContainer.children).forEach(child => {
+            if(child !== input.parentElement && child.dataset.expanded === "true"){
+                child.lastElementChild.classList.toggle("hidden");
+                child.firstElementChild.lastElementChild.classList.replace("fa-chevron-up","fa-chevron-down");
+                child.classList.replace("col-12","col-3");
+                child.classList.replace("col-lg-7","col-lg-2");
+                child.dataset.expanded="false";
+            }
+        })
     }))
 }
 
@@ -112,6 +121,7 @@ function addFilterTag(){
             currentRecipes=searchByTag(currentRecipes,option);
             displayRecipes(currentRecipes);
             displayFilterOptions(currentRecipes);
+            hideOptions();
             addFilterTag();
         })
     })
@@ -119,17 +129,36 @@ function addFilterTag(){
 
 function removeFilterTag(closeIcon){
     const filterTagContainer=document.querySelector(".filter-selected-container ul");
-    const optionSelected=document.querySelectorAll(".option-selected");
+    const optionsSelected=document.querySelectorAll(".option-selected");
     const searchBar=document.querySelector("#search-bar-recipes");
     closeIcon.addEventListener("click",function(e){
+        //option.classList.toggle("hidden");
         filterTagContainer.removeChild(closeIcon.parentNode);
         //currentRecipes=stateRecipes.filter(state => state.tag.textContent === tag.textContent)[0].previousRecipes;
         currentRecipes=searchRecipes(recipes,searchBar.value);
-        currentRecipes=searchByTags(recipes,optionSelected);
-        console.log(currentRecipes);
+        currentRecipes=searchByTags(currentRecipes,optionsSelected);
+        //console.log(currentRecipes);
         displayRecipes(currentRecipes);
         displayFilterOptions(currentRecipes);
+        hideOptions();
         addFilterTag();
+    })
+}
+
+function hideOptions(){
+
+    const options = [...document.querySelectorAll(".option-ingredient"),
+    ...document.querySelectorAll(".option-appliance"),
+    ...document.querySelectorAll(".option-utensil")];
+
+    const optionsSelected=document.querySelectorAll(".option-selected");
+
+    options.forEach(option => {
+        optionsSelected.forEach(optionSelected => {
+            if(option.textContent === optionSelected.textContent){
+                option.parentElement.classList.toggle("hidden");
+            }
+        })
     })
 }
 

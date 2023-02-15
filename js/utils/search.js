@@ -47,7 +47,10 @@ function searchByTags(recipes,tags){
 searchBar.addEventListener("input",function(e){
     const optionSelected=document.querySelectorAll(".option-selected");
     if(searchBar.value.length >=3){
-        currentRecipes=searchRecipes(currentRecipes,searchBar.value);
+        currentRecipes=searchRecipes(recipes,searchBar.value);
+        if(optionSelected.length !== 0){
+            currentRecipes=searchByTags(currentRecipes,optionSelected);
+        }
         if(currentRecipes !== undefined){
             displayRecipes(currentRecipes);
             displayFilterOptions(currentRecipes);
