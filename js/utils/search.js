@@ -19,7 +19,16 @@ function containsIngredients(ingredients,input){
             contains=ingredient.ingredient.toLowerCase().includes(input);
             //console.log(ingredient.ingredient,contains,input);
         }
-        
+    });
+    return contains;
+}
+
+function containsStrictIngredients(ingredients,input){
+    let contains=false;
+    ingredients.forEach(ingredient => {
+        if(ingredient.ingredient.toLowerCase() === input){
+            contains=true;
+        }
     });
     return contains;
 }
@@ -27,10 +36,10 @@ function containsIngredients(ingredients,input){
 function searchByTag(recipes,tag){
     let recipesSearched;
     if(tag.className.includes("ingredient")){
-        recipesSearched=recipes.filter(recipe => containsIngredients(recipe.ingredients,tag.textContent));
+        recipesSearched=recipes.filter(recipe => containsStrictIngredients(recipe.ingredients,tag.textContent));
     }
     if(tag.className.includes("appliance")){
-        recipesSearched=recipes.filter(recipe => recipe.appliance.toLowerCase().includes(tag.textContent));
+        recipesSearched=recipes.filter(recipe => recipe.appliance.toLowerCase() === tag.textContent);
     }
     if(tag.className.includes("utensil")){
         recipesSearched=recipes.filter(recipe => recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(tag.textContent));
