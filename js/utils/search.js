@@ -5,35 +5,57 @@ let currentRecipes=recipes;
 const searchBar=document.querySelector("#search-bar-recipes");
 
 function searchRecipes(recipes,input){
+    let recipesSearched=[];
     input=input.toLowerCase();
-    const recipesSearched=recipes.filter(recipe => recipe.name.toLowerCase().includes(input) || containsIngredients(recipe.ingredients,input) || recipe.description.toLowerCase().includes(input));
+    for (let recipe of recipes){
+        if(recipe.name.toLowerCase().includes(input)){
+            recipesSearched.push(recipe);
+        }else if(containsIngredients(recipe.ingredients,input)){
+            recipesSearched.push(recipe);
+        }else if(recipe.description.toLowerCase().includes(input)){
+            recipesSearched.push(recipe);
+        }
+    }
     return recipesSearched;
 }
 
 function containsIngredients(ingredients,input){
     let contains=false;
-    ingredients.forEach(ingredient => {
-        if(contains){
+    for(let ingredient of ingredients){
+        if(ingredient.ingredient.toLowerCase().includes(input)){
             contains=true;
-        }else{
-            contains=ingredient.ingredient.toLowerCase().includes(input);
-            //console.log(ingredient.ingredient,contains,input);
+            break;
         }
-        
-    });
+    }
     return contains;
 }
 
 function searchByTag(recipes,tag){
-    let recipesSearched;
+    let recipesSearched=[];
     if(tag.className.includes("ingredient")){
-        recipesSearched=recipes.filter(recipe => containsIngredients(recipe.ingredients,tag.textContent));
+        for(let recipe of recipes){
+            for(let ingredient of recipe.ingredients){
+                if(ingredient.ingredient.toLowerCase() === tag.textContent){
+                    recipesSearched.push(recipe);
+                }
+            }
+        }
     }
     if(tag.className.includes("appliance")){
-        recipesSearched=recipes.filter(recipe => recipe.appliance.toLowerCase().includes(tag.textContent));
+        for(let recipe of recipes){
+            if(recipe.appliance.toLowerCase().includes(tag.textContent)){
+                recipesSearched.push(recipe);
+            }
+        }
     }
     if(tag.className.includes("utensil")){
-        recipesSearched=recipes.filter(recipe => recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(tag.textContent));
+        for(let recipe of recipes){
+            for(let ustensil of recipe.ustensils){
+                if(ustensil.toLowerCase().includes(tag.textContent)){
+                    recipesSearched.push(recipe);
+                }
+            }
+        }
     }
     return recipesSearched;
 }

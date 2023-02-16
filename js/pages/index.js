@@ -146,12 +146,12 @@ function addFilterTag(){
 
 function removeFilterTag(closeIcon){
     const filterTagContainer=document.querySelector(".filter-selected-container ul");
-    const optionsSelected=document.querySelectorAll(".option-selected");
     const searchBar=document.querySelector("#search-bar-recipes");
     closeIcon.addEventListener("click",function(e){
         //option.classList.toggle("hidden");
         filterTagContainer.removeChild(closeIcon.parentNode);
         //currentRecipes=stateRecipes.filter(state => state.tag.textContent === tag.textContent)[0].previousRecipes;
+        const optionsSelected=document.querySelectorAll(".option-selected");
         currentRecipes=searchRecipes(recipes,searchBar.value);
         currentRecipes=searchByTags(currentRecipes,optionsSelected);
         //console.log(currentRecipes);
