@@ -43,7 +43,7 @@ function searchByTag(recipes,tag){
     }
     if(tag.className.includes("appliance")){
         for(let recipe of recipes){
-            if(recipe.appliance.toLowerCase().includes(tag.textContent)){
+            if(recipe.appliance.toLowerCase() === tag.textContent){
                 recipesSearched.push(recipe);
             }
         }
@@ -51,7 +51,7 @@ function searchByTag(recipes,tag){
     if(tag.className.includes("utensil")){
         for(let recipe of recipes){
             for(let ustensil of recipe.ustensils){
-                if(ustensil.toLowerCase().includes(tag.textContent)){
+                if(ustensil.toLowerCase() === tag.textContent){
                     recipesSearched.push(recipe);
                 }
             }
