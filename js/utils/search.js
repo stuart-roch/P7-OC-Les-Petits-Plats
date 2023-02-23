@@ -111,7 +111,7 @@ searchBar.addEventListener("input",function(e){
         }
         if(currentRecipes !== undefined){
             displayRecipes(currentRecipes);
-            displayFilterOptions(currentRecipes);
+            addFilterOptions(currentRecipes);
             addFilterTag();
         }
     }else{
@@ -121,7 +121,7 @@ searchBar.addEventListener("input",function(e){
             currentRecipes=recipes;
         }
         displayRecipes(currentRecipes);
-        displayFilterOptions(currentRecipes);
+        addFilterOptions(currentRecipes);
         addFilterTag();
     }
 })
